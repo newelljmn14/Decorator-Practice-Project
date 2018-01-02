@@ -15,14 +15,5 @@ export class ListDataDivisibleBy15Decorator extends ListDataDecorator implements
                 this.listDataService.modifiedListData[index] = 'fizzbuzz';
             }
         });
-
-
-        // this.listDataService.modifiedListData = this.listDataService.modifiedListData.map(value => {
-        //     if (value % 15 === 0) {
-        //         return 'fizzbuzz';
-        //     }
-
-        //     return value;
-        // });
     }
 }

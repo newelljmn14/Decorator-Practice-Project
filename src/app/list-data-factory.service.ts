@@ -13,33 +13,27 @@ export class ListDataFactoryService {
   constructor(private listDataService: ListDataServiceService) {
   }
 
-  public getDecoratedListDataSevice(): ListDataDecorator {
-    if (!this.typesOfMapping) {
+  public getDecoratedListDataSevice(mappingType: string): ListDataDecorator {
+    if (!mappingType) {
       return new ListDataDecorator(this.listDataService);
     }
 
-    this.typesOfMapping.forEach(value => {
-      switch (value) {
-        case 'fizz':
-          this.listDataDecorator = new ListDataDivisibleBy3Decorator(this.listDataService);
-          break;
-        case 'buzz':
-          this.listDataDecorator = new ListDataDivisibleBy5Decorator(this.listDataService);
-          break;
-        case 'fizzbuzz':
-          this.listDataDecorator = new ListDataDivisibleBy15Decorator(this.listDataService);
-          break;
-        default:
-          this.listDataDecorator = new ListDataDecorator(this.listDataService);
-          break;
-      }
-    });
+    switch (mappingType) {
+      case 'fizz':
+        this.listDataDecorator = new ListDataDivisibleBy3Decorator(this.listDataService);
+        break;
+      case 'buzz':
+        this.listDataDecorator = new ListDataDivisibleBy5Decorator(this.listDataService);
+        break;
+      case 'fizzbuzz':
+        this.listDataDecorator = new ListDataDivisibleBy15Decorator(this.listDataService);
+        break;
+      default:
+        this.listDataDecorator = new ListDataDecorator(this.listDataService);
+        break;
+    }
 
     return this.listDataDecorator;
-  }
-
-  public setTypesOfMapping(typesOfMapping: string[]): void {
-    this.typesOfMapping = typesOfMapping;
   }
 
 }

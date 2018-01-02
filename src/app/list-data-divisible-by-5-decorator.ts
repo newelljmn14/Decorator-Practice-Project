@@ -10,12 +10,10 @@ export class ListDataDivisibleBy5Decorator extends ListDataDecorator implements 
     }
 
     public modifyListData(): void {
-        this.listDataService.modifiedListData = this.listDataService.modifiedListData.map(value => {
-            if (value % 5 === 0) {
-                return 'buzz';
+        this.listDataService.listData.forEach((element, index) => {
+            if (element % 5 === 0) {
+                this.listDataService.modifiedListData[index] = 'buzz';
             }
-
-            return value;
         });
     }
 }

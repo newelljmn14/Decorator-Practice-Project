@@ -7,7 +7,7 @@ export class ListDataServiceService {
 
   constructor() {
     this.initializeListData();
-    this.modifiedListData = this.listData;
+    this.modifiedListData = this.listData.slice();
   }
 
   private initializeListData(): void {
