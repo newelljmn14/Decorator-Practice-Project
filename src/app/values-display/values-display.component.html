@@ -1,0 +1,10 @@
+<select (change)="updateTypesOfMapping($event.target.value)">
+  <option value="fizz">fizz</option>
+  <option value="buzz">buzz</option>
+  <option value="fizzbuzz">fizzbuzz</option>
+</select>
+
+<p>values</p>
+<div *ngIf="viewListData">
+  <div *ngFor="let value of viewListData">{{value}}</div>
+</div>
