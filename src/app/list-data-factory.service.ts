@@ -4,6 +4,8 @@ import { ListDataDivisibleBy3Decorator } from './list-data-divisible-by-3-decora
 import { ListDataDecorator } from './list-data-decorator';
 import { ListDataDivisibleBy5Decorator } from './list-data-divisible-by-5-decorator';
 import { ListDataDivisibleBy15Decorator } from './list-data-divisible-by-15-decorator';
+import { ListDataEvenDecorator } from './list-data-even';
+import { ListDataOddDecorator } from './list-data-odd';
 
 @Injectable()
 export class ListDataFactoryService {
@@ -27,6 +29,12 @@ export class ListDataFactoryService {
         break;
       case 'fizzbuzz':
         this.listDataDecorator = new ListDataDivisibleBy15Decorator(this.listDataService);
+        break;
+      case 'even':
+        this.listDataDecorator = new ListDataEvenDecorator(this.listDataService);
+        break;
+      case 'odd':
+        this.listDataDecorator = new ListDataOddDecorator(this.listDataService);
         break;
       default:
         this.listDataDecorator = new ListDataDecorator(this.listDataService);
