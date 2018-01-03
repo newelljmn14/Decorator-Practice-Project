@@ -13,12 +13,12 @@ export class ValuesDisplayComponent implements OnInit {
 
   ngOnInit() {
     this.viewListData = this.listDataFactoryService.getDecoratedListDataSevice('')
-      .listDataService.modifiedListData;
+      .modifiedListData;
   }
 
   public updateTypesOfMapping(typeOfMapping: string) {
     this.viewListData = this.listDataFactoryService.getDecoratedListDataSevice(typeOfMapping)
-      .listDataService.modifiedListData;
+      .modifiedListData;
   }
 
 }
