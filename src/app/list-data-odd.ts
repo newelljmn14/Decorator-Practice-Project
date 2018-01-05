@@ -4,16 +4,17 @@ import { ListDataServiceService } from './list-data-service.service';
 
 export class ListDataOddDecorator extends ListDataDecorator implements IModifyListData {
 
-    constructor(listDataServiceService: ListDataServiceService) {
-        super(listDataServiceService);
-        this.modifyListData();
-    }
+    public getListData(): number[] {
+        const modifiedListData = [];
 
-    public modifyListData(): void {
-        this.listDataService.listData.forEach((element, index) => {
+         this.listDataService.getListData().forEach((element, index) => {
             if ((element + 1) % 2 === 0) {
-                this.listDataService.modifiedListData[index] = '*3*';
+                modifiedListData.push('*3*');
+            } else {
+                modifiedListData.push(element);
             }
         });
+
+        return modifiedListData;
     }
 }

@@ -4,16 +4,17 @@ import { ListDataServiceService } from './list-data-service.service';
 
 export class ListDataDivisibleBy5Decorator extends ListDataDecorator implements IModifyListData {
 
-    constructor(listDataServiceService: ListDataServiceService) {
-        super(listDataServiceService);
-        this.modifyListData();
-    }
+    public getListData(): number[] {
+        const modifiedListData = [];
 
-    public modifyListData(): void {
-        this.listDataService.listData.forEach((element, index) => {
+       this.listDataService.getListData().forEach((element, index) => {
             if (element % 5 === 0) {
-                this.listDataService.modifiedListData[index] = 'buzz';
+                modifiedListData.push('buzz');
+            } else {
+                modifiedListData.push(element);
             }
         });
+
+        return modifiedListData;
     }
 }

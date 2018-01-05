@@ -8,17 +8,19 @@ import { ListDataFactoryService } from '../list-data-factory.service';
 })
 export class ValuesDisplayComponent implements OnInit {
   public viewListData: any[] = [];
+  public firstMappingType: string;
+  public secondMappingType: string;
 
   constructor(private listDataFactoryService: ListDataFactoryService) { }
 
   ngOnInit() {
-    this.viewListData = this.listDataFactoryService.getDecoratedListDataSevice('')
-      .modifiedListData;
+    this.viewListData = this.listDataFactoryService.getDecoratedListDataSevice(this.firstMappingType, this.secondMappingType)
+      .getListData();
   }
 
-  public updateTypesOfMapping(typeOfMapping: string) {
-    this.viewListData = this.listDataFactoryService.getDecoratedListDataSevice(typeOfMapping)
-      .modifiedListData;
+  public updateTypesOfMapping() {
+    this.viewListData = this.listDataFactoryService.getDecoratedListDataSevice(this.firstMappingType, this.secondMappingType)
+      .getListData();
   }
 
 }

@@ -1,4 +1,12 @@
-<select (change)="updateTypesOfMapping($event.target.value)">
+<select [(ngModel)]="firstMappingType" (change)="updateTypesOfMapping()">
+  <option value="fizz">fizz</option>
+  <option value="buzz">buzz</option>
+  <option value="fizzbuzz">fizzbuzz</option>
+  <option value="even">even</option>
+  <option value="odd">odd</option>
+</select>
+
+<select [(ngModel)]="secondMappingType" (change)="updateTypesOfMapping()">
   <option value="fizz">fizz</option>
   <option value="buzz">buzz</option>
   <option value="fizzbuzz">fizzbuzz</option>

@@ -1,3 +1,4 @@
+import { IModifyListData } from './i-modify-list-data';
 import { Injectable } from '@angular/core';
 import { ListDataServiceService } from './list-data-service.service';
 import { ListDataDivisibleBy3Decorator } from './list-data-divisible-by-3-decorator';
@@ -10,38 +11,47 @@ import { ListDataOddDecorator } from './list-data-odd';
 @Injectable()
 export class ListDataFactoryService {
   private typesOfMapping: string[];
-  private listDataDecorator: ListDataDecorator;
 
   constructor(private listDataService: ListDataServiceService) {
   }
 
-  public getDecoratedListDataSevice(mappingType: string): ListDataDecorator {
+  private getModifiedListData(mappingType: string, startingModifiedListData: IModifyListData) {
+    let listDataDecorator;
+
     if (!mappingType) {
-      return new ListDataDecorator(this.listDataService);
+      return startingModifiedListData;
     }
 
     switch (mappingType) {
       case 'fizz':
-        this.listDataDecorator = new ListDataDivisibleBy3Decorator(this.listDataService);
+        listDataDecorator = new ListDataDivisibleBy3Decorator(startingModifiedListData);
         break;
       case 'buzz':
-        this.listDataDecorator = new ListDataDivisibleBy5Decorator(this.listDataService);
+        listDataDecorator = new ListDataDivisibleBy5Decorator(startingModifiedListData);
         break;
       case 'fizzbuzz':
-        this.listDataDecorator = new ListDataDivisibleBy15Decorator(this.listDataService);
+        listDataDecorator = new ListDataDivisibleBy15Decorator(startingModifiedListData);
         break;
       case 'even':
-        this.listDataDecorator = new ListDataEvenDecorator(this.listDataService);
+        listDataDecorator = new ListDataEvenDecorator(startingModifiedListData);
         break;
       case 'odd':
-        this.listDataDecorator = new ListDataOddDecorator(this.listDataService);
+        listDataDecorator = new ListDataOddDecorator(startingModifiedListData);
         break;
       default:
-        this.listDataDecorator = new ListDataDecorator(this.listDataService);
+        listDataDecorator = startingModifiedListData;
         break;
     }
 
-    return this.listDataDecorator;
+    return listDataDecorator;
   }
+
+  public getDecoratedListDataSevice(mappingType: string, secondMappingType: string): IModifyListData {
+    const initialModifiedListDataService = this.getModifiedListData(mappingType, this.listDataService);
+
+    return this.getModifiedListData(secondMappingType, initialModifiedListDataService);
+  }
+
+
 
 }
